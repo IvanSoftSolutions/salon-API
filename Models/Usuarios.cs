@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace salon_web_api.Models
 {
-    public partial class Usuario
+    public partial class Usuarios
     {
-        public Usuario()
+        public Usuarios()
         {
-            Eventos = new HashSet<Evento>();
+            Eventos = new HashSet<Eventos>();
             Payments = new HashSet<Payment>();
         }
 
@@ -23,7 +23,7 @@ namespace salon_web_api.Models
         public bool? CambioContrasenia { get; set; }
         public bool? IsAdmin { get; set; }
 
-        public virtual ICollection<Evento> Eventos { get; set; }
+        public virtual ICollection<Eventos> Eventos { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
     }
 }

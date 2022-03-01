@@ -10,7 +10,7 @@ namespace salon_web_api.Models
         public int EventId { get; set; }
         public bool Estado { get; set; }
 
-        public virtual Evento Event { get; set; } = null!;
-        public virtual Usuario User { get; set; } = null!;
+        public virtual Eventos Event { get; set; } = null!;
+        public virtual Usuarios User { get; set; } = null!;
     }
 }
