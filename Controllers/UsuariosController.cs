@@ -73,6 +73,45 @@ namespace salon_web_api.Controllers
             return Datos;
         }
 
+        // PUT: api/Usuarios/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        [RequestSizeLimit(100000000)]
+        public async Task<ActionResult<Usuarios>> PutUsuario(int id, Usuarios usuario)
+        {
+            if (id != usuario.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(usuario).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok();
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool UsuarioExists(int id)
+        {
+            return _context.Eventos.Any(e => e.Id == id);
+        }
+
         //-------------------------------------------------------------------------------------------------------------
         //actualizacion del pass del ususario 
         [HttpPut("updpass")]

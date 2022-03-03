@@ -8,7 +8,7 @@ namespace salon_web_api.Models
         public Usuarios()
         {
             Eventos = new HashSet<Eventos>();
-            Payments = new HashSet<Payment>();
+            Payment = new HashSet<Payment>();
         }
 
         public int Id { get; set; }
@@ -24,6 +24,6 @@ namespace salon_web_api.Models
         public bool? IsAdmin { get; set; }
 
         public virtual ICollection<Eventos> Eventos { get; set; }
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<Payment> Payment { get; set; }
     }
 }

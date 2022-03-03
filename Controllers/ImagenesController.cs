@@ -56,6 +56,44 @@ namespace salon_web_api.Controllers
 
             return result;
         }
+        // PUT: api/Usuarios/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        [RequestSizeLimit(100000000)]
+        public async Task<ActionResult<Usuarios>> PutImagen(int id, Imagenes imagen)
+        {
+            if (id != imagen.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(imagen).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ImagenExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok();
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        private bool ImagenExists(int id)
+        {
+            return _context.Eventos.Any(e => e.Id == id);
+        }
 
         // DELETE: api/Imagenes/5
         [HttpDelete("{id}")]

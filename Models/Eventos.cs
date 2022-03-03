@@ -7,7 +7,7 @@ namespace salon_web_api.Models
     {
         public Eventos()
         {
-            Payments = new HashSet<Payment>();
+            Payment = new HashSet<Payment>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace salon_web_api.Models
         public string Tipo { get; set; } = null!;
 
         public virtual Usuarios User { get; set; } = null!;
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<Payment> Payment { get; set; }
     }
 }

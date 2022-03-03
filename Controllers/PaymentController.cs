@@ -53,6 +53,40 @@ namespace salon_web_api.Controllers
             return CreatedAtAction("GetPayment", new { id = payment.Id }, payment);
         }
 
+        // PUT: api/Usuarios/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        [RequestSizeLimit(100000000)]
+        public async Task<ActionResult<Usuarios>> PutPayment(int id, Payment payment)
+        {
+            if (id != payment.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(payment).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PaymentExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok();
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/Payment/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Payment>> DeletePayment(int eventoId)
@@ -67,6 +101,11 @@ namespace salon_web_api.Controllers
             await _context.SaveChangesAsync();
 
             return evento;
+        }
+
+        private bool PaymentExists(int id)
+        {
+            return _context.Payment.Any(e => e.Id == id);
         }
     }
 }

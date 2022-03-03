@@ -53,6 +53,40 @@ namespace salon_web_api.Controllers
             return CreatedAtAction("GetEventos", new { id = evento.Id }, evento);
         }
 
+        // PUT: api/Usuarios/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPut("{id}")]
+        [RequestSizeLimit(100000000)]
+        public async Task<ActionResult<Usuarios>> PutEvento(int id, Eventos evento)
+        {
+            if (id != evento.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(evento).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EventoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok();
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/Eventos/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Eventos>> DeleteEventos(int eventoId)
@@ -67,6 +101,11 @@ namespace salon_web_api.Controllers
             await _context.SaveChangesAsync();
 
             return evento;
+        }
+
+        private bool EventoExists(int id)
+        {
+            return _context.Eventos.Any(e => e.Id == id);
         }
     }
 }
