@@ -11,6 +11,6 @@ namespace salon_web_api.Models
         public bool Estado { get; set; }
 
         public virtual Eventos Event { get; set; } = null!;
-        public virtual Usuarios User { get; set; } = null!;
+        public virtual Usuario User { get; set; } = null!;
     }
 }

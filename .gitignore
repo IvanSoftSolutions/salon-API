@@ -54,5 +54,3 @@ Thumbs.db
 
 ApplicationDbContext.cs
 appsettings.json
-EnvioCorreo.cs
-Startup.cs

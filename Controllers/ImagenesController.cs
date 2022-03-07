@@ -61,7 +61,7 @@ namespace salon_web_api.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [RequestSizeLimit(100000000)]
-        public async Task<ActionResult<Usuarios>> PutImagen(int id, Imagenes imagen)
+        public async Task<ActionResult<Imagenes>> PutImagen(int id, Imagenes imagen)
         {
             if (id != imagen.Id)
             {

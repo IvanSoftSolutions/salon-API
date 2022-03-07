@@ -40,11 +40,11 @@ namespace salon_web_api.Controllers
         //// GET: api/
         ///
         [HttpPost]
-        public async Task<ActionResult<Usuarios>> Login(Usuarios usuario)
+        public async Task<ActionResult<Usuario>> Login(Usuario usuario)
         {
             //string result = string.Empty;
             //List<MensajeViewModel> msg = new List<MensajeViewModel>();
-            var usuarios = await _context.Usuarios.Where(u => u.Correo == usuario.Correo && u.Contrasenia == usuario.Contrasenia).SingleOrDefaultAsync();
+            var usuarios = await _context.Usuario.Where(u => u.Correo == usuario.Correo && u.Contrasenia == usuario.Contrasenia).SingleOrDefaultAsync();
 
             if (usuarios == null)
                 return NotFound();

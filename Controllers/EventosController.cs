@@ -58,7 +58,7 @@ namespace salon_web_api.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [RequestSizeLimit(100000000)]
-        public async Task<ActionResult<Usuarios>> PutEvento(int id, Eventos evento)
+        public async Task<ActionResult<Eventos>> PutEvento(int id, Eventos evento)
         {
             if (id != evento.Id)
             {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace salon_web_api.Models
 {
-    public partial class Usuarios
+    public partial class Usuario
     {
-        public Usuarios()
+        public Usuario()
         {
             Eventos = new HashSet<Eventos>();
             Payment = new HashSet<Payment>();
@@ -16,7 +16,7 @@ namespace salon_web_api.Models
         public string Apellido { get; set; } = null!;
         public string Correo { get; set; } = null!;
         public string Contrasenia { get; set; } = null!;
-        public DateOnly FechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
         public string CodigoPostal { get; set; } = null!;
         public string? Instagram { get; set; }
         public string? Facebook { get; set; }

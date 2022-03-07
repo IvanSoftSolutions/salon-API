@@ -15,8 +15,7 @@ namespace salon_web_api.Models
         public DateOnly Fecha { get; set; }
         public string Estado { get; set; } = null!;
         public string Tipo { get; set; } = null!;
-
-        public virtual Usuarios User { get; set; } = null!;
+        public virtual Usuario User { get; set; } = null!;
         public virtual ICollection<Payment> Payment { get; set; }
     }
 }

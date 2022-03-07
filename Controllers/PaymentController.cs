@@ -58,7 +58,7 @@ namespace salon_web_api.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [RequestSizeLimit(100000000)]
-        public async Task<ActionResult<Usuarios>> PutPayment(int id, Payment payment)
+        public async Task<ActionResult<Payment>> PutPayment(int id, Payment payment)
         {
             if (id != payment.Id)
             {

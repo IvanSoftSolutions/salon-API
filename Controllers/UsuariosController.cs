@@ -14,58 +14,58 @@ namespace salon_web_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public UsuariosController(ApplicationDbContext context)
+        public UsuarioController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Usuario
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuarios>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetUsuario()
         {
-            return await _context.Usuarios.ToListAsync();
+            return await _context.Usuario.ToListAsync();
         }
 
 
-        // GET: api/Usuarios/5
+        // GET: api/Usuario/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuarios>> GetUsuarios(int id)
+        public async Task<ActionResult<Usuario>> GetUsuario(int id)
         {
-            var usuarios = await _context.Usuarios.FindAsync(id);
+            var usuario = await _context.Usuario.FindAsync(id);
 
-            if (usuarios == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
 
-            return usuarios;
+            return usuario;
         }
 
         //buscamos usuario por nombre de usuario
-        // GET: api/Usuarios/uprueba
+        // GET: api/Usuario/uprueba
 
         [HttpGet]
-        [Route("ShowUsuarios/{correo}/{pass}")]
-        public async Task<ActionResult<Usuarios>> ShowUsuarios(String correo, String pass)
+        [Route("ShowUsuario/{correo}/{pass}")]
+        public async Task<ActionResult<Usuario>> ShowUsuario(String correo, String pass)
         {
-            var Usuarios = await _context.Usuarios.Where(u => u.Correo == correo && u.Contrasenia == pass).SingleOrDefaultAsync();
-            if (Usuarios == null)
+            var Usuario = await _context.Usuario.Where(u => u.Correo == correo && u.Contrasenia == pass).SingleOrDefaultAsync();
+            if (Usuario == null)
             {
                 return NotFound();
             }
 
-            return Usuarios;
+            return Usuario;
         }
 
         [HttpGet]
         [Route("checkData/{data}/")]
-        public async Task<ActionResult<Usuarios>> ValidateUser(String data)
+        public async Task<ActionResult<Usuario>> ValidateUser(String data)
         {
-            var Datos = await _context.Usuarios.Where(u => u.Correo == data).SingleOrDefaultAsync();// verificamos el correo
+            var Datos = await _context.Usuario.Where(u => u.Correo == data).SingleOrDefaultAsync();// verificamos el correo
             if (Datos == null)
             {
                 return NotFound();
@@ -73,12 +73,12 @@ namespace salon_web_api.Controllers
             return Datos;
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Usuario/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [RequestSizeLimit(100000000)]
-        public async Task<ActionResult<Usuarios>> PutUsuario(int id, Usuarios usuario)
+        public async Task<ActionResult<Usuario>> PutUsuario(int id, Usuario usuario)
         {
             if (id != usuario.Id)
             {
@@ -115,14 +115,14 @@ namespace salon_web_api.Controllers
         //-------------------------------------------------------------------------------------------------------------
         //actualizacion del pass del ususario 
         [HttpPut("updpass")]
-        public async Task<ActionResult<string>> PutUsuarios(Usuarios usu)
+        public async Task<ActionResult<string>> PutUsuario(Usuario usu)
         {
             string result = string.Empty;
             List<MensajeViewModel> msg = new List<MensajeViewModel>();
             if (usu.Correo != null && usu.Contrasenia != null)
             {
-                var usuarios = await _context.Usuarios.Where(u => u.Correo == usu.Correo).SingleOrDefaultAsync();
-                if (usuarios == null)
+                var usuario = await _context.Usuario.Where(u => u.Correo == usu.Correo).SingleOrDefaultAsync();
+                if (usuario == null)
                 {
                     msg.Add(TipoMensaje.MensajesError("No se logro actualizar la contraseña, usuario no registrado!"));
                 }
@@ -131,10 +131,10 @@ namespace salon_web_api.Controllers
                     try
                     {
 
-                        usuarios.Contrasenia = usu.Contrasenia;
-                        usuarios.CambioContrasenia = null;
+                        usuario.Contrasenia = usu.Contrasenia;
+                        usuario.CambioContrasenia = null;
 
-                        _context.Update(usuarios);
+                        _context.Update(usuario);
                         await _context.SaveChangesAsync();
                         msg.Add(TipoMensaje.Exitoso("Se actualizo correctamente el registro"));
 
@@ -154,36 +154,36 @@ namespace salon_web_api.Controllers
             return result;
         }
         //-------------------------------------------------------------------------------------------------------------
-        // POST: api/Usuarios
+        // POST: api/Usuario
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<String>> PostUsuarios(Usuarios usuarios)
+        public async Task<ActionResult<String>> PostUsuario(Usuario usuario)
         {
             string result = string.Empty;
             List<MensajeViewModel> msg = new List<MensajeViewModel>();
-            if (usuarios.Nombre != null)
+            if (usuario.Nombre != null)
             {
-                usuarios.IsAdmin = false;
-                _context.Usuarios.Add(usuarios);
+                usuario.IsAdmin = false;
+                _context.Usuario.Add(usuario);
                 await _context.SaveChangesAsync();
-                CreatedAtAction("GetUsuarios", new { id = usuarios.Id }, usuarios);
+                CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuario);
                 msg.Add(TipoMensaje.Exitoso("Se agrego correctamente el registro"));
             }
             result = JsonConvert.SerializeObject(msg);
             return result;
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Usuario/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<String>> DeleteUsuarios(int Id)
+        public async Task<ActionResult<String>> DeleteUsuario(int Id)
         {
             string result = string.Empty;
             List<MensajeViewModel> msg = new List<MensajeViewModel>();
             if (Id > 0)
             {
-                var usuario = _context.Usuarios.FirstOrDefault(c => c.Id == Id);
-                _context.Usuarios.Remove(usuario);
+                var usuario = _context.Usuario.FirstOrDefault(c => c.Id == Id);
+                _context.Usuario.Remove(usuario);
                 await _context.SaveChangesAsync();
                 msg.Add(TipoMensaje.Exitoso("Se elimino correctamente el registro"));
             }
@@ -198,11 +198,11 @@ namespace salon_web_api.Controllers
         }
 
         [HttpGet("SendEmail/{user}")]
-        public async Task<ActionResult<Usuarios>> SendEmail(string user)
+        public async Task<ActionResult<Usuario>> SendEmail(string user)
         {
-            var usuarios = await _context.Usuarios.SingleOrDefaultAsync(u => u.Correo == user);
+            var usuario = await _context.Usuario.SingleOrDefaultAsync(u => u.Correo == user);
 
-            if (usuarios == null)
+            if (usuario == null)
             {
                 return NotFound();
             }
@@ -210,18 +210,18 @@ namespace salon_web_api.Controllers
             try
             {
                 var rng = new Random();
-                usuarios.Contrasenia = usuarios.Contrasenia + rng.Next(-20, 55).ToString();
-                usuarios.CambioContrasenia = true;
-                _context.Update(usuarios);
+                usuario.Contrasenia = usuario.Contrasenia + rng.Next(-20, 55).ToString();
+                usuario.CambioContrasenia = true;
+                _context.Update(usuario);
                 await _context.SaveChangesAsync();
-                EnvioCorreo.SendGrid(usuarios.Correo, usuarios.Contrasenia);
+                EnvioCorreo.SendGrid(usuario.Correo, usuario.Contrasenia);
 
             }
             catch (DbUpdateConcurrencyException)
             {
             }
 
-            return usuarios;
+            return usuario;
         }        
     }
 }
