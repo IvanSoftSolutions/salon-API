@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ivand\\Desktop\\DaFolder\\salon_web_api\\salon_web_api.csproj": {}
+    "C:\\Users\\ivand\\Desktop\\DaFolder\\Salon\\salon_web_api\\salon_web_api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ivand\\Desktop\\DaFolder\\salon_web_api\\salon_web_api.csproj": {
+    "C:\\Users\\ivand\\Desktop\\DaFolder\\Salon\\salon_web_api\\salon_web_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ivand\\Desktop\\DaFolder\\salon_web_api\\salon_web_api.csproj",
+        "projectUniqueName": "C:\\Users\\ivand\\Desktop\\DaFolder\\Salon\\salon_web_api\\salon_web_api.csproj",
         "projectName": "salon_web_api",
-        "projectPath": "C:\\Users\\ivand\\Desktop\\DaFolder\\salon_web_api\\salon_web_api.csproj",
+        "projectPath": "C:\\Users\\ivand\\Desktop\\DaFolder\\Salon\\salon_web_api\\salon_web_api.csproj",
         "packagesPath": "C:\\Users\\ivand\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ivand\\Desktop\\DaFolder\\salon_web_api\\obj\\",
+        "outputPath": "C:\\Users\\ivand\\Desktop\\DaFolder\\Salon\\salon_web_api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -54,10 +54,6 @@
               "target": "Package",
               "version": "[6.0.2, )"
             },
-            "MySql.Data.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.22, )"
-            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
@@ -89,6 +85,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
+              "version": "[6.0.1, 6.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[6.0.1, 6.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
+              "version": "[6.0.1, 6.0.1]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -98,6 +108,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "linux-x64": {
+          "#import": []
         }
       }
     }
