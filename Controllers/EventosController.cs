@@ -24,16 +24,10 @@ namespace salon_web_api.Controllers
 
         // GET: api/Eventos/5
         [HttpGet("{userId}")]
-        public async Task<ActionResult<Eventos>> GetEventos(int userId)
+        public async Task<ActionResult<IEnumerable<Eventos>>> GetEventos(int userId)
         {
-            var eventos = await _context.Eventos.Where(e => e.UserId == userId).SingleOrDefaultAsync();
+            return await _context.Eventos.Where(e => e.UserId == userId).ToListAsync();
 
-            if (eventos == null)
-            {
-                return NotFound();
-            }
-
-            return eventos;
         }
 
         // POST: api/Eventos
